@@ -117,7 +117,7 @@ public class Node implements InterfaceActuatorTarget, InterfaceScenarioElement {
     @Override
     public void register_actuator(AbstractActuator act) throws OTMException {
         if(this.actuator!=null)
-            throw new OTMException("Multiple actuators on node");
+            throw new OTMException(String.format("Node cannot have multiple actuators (node %d has existing actuator %d", getId(), this.actuator.getId()));
         this.actuator = act;
     }
 

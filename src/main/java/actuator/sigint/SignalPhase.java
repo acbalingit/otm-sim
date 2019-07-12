@@ -197,7 +197,7 @@ public class SignalPhase {
                 rate_vps = 0f;
                 break;
             case GREEN:
-                rate_vps = Float.POSITIVE_INFINITY;
+                rate_vps = 0.05f; //Float.POSITIVE_INFINITY;
                 break;
         }
 

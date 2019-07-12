@@ -15,6 +15,7 @@ import error.OTMErrorLog;
 import error.OTMException;
 import dispatch.Dispatcher;
 import common.Network;
+import common.Node;
 import jaxb.Split;
 import keys.KeyCommodityDemandTypeId;
 import keys.KeyCommodityLink;
@@ -75,6 +76,19 @@ public class Scenario {
             actuators.values().stream().forEach(x -> x.validate(errorLog));
         if( data_demands!=null )
             data_demands.values().stream().forEach(x -> x.validate(errorLog));
+
+        if (commodities.values().stream().anyMatch(x -> !x.pathfull)) {
+            for (Node node: network.nodes.values()) {
+                if (node.splits != null){
+                    Set<Long> split_in_links = node.splits.values().stream().map(x->x.link_in_id).collect(toSet());
+                    for (Link link : node.in_links.values()) {
+                        if (!split_in_links.contains(link.getId()))
+                            errorLog.addError(String.format("Node %s has missing splits for link %s", node.getId(), link.getId()));
+                    }
+                }
+            }
+        }
+        
         return errorLog;
     }
 

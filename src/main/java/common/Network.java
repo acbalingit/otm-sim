@@ -370,7 +370,7 @@ public class Network {
 
         // absent road connections: create them, if it is not a sink
         if(out_rcs.isEmpty() && !link.is_sink)
-            throw new OTMException("THIS SHOULD NOT HAPPEN.");
+            throw new OTMException(String.format("No outgoing road connection for non-sink link %d", link.getId()));
 
         // create lanegroups
         link.set_long_lanegroups(create_dnflw_lanegroups(link,out_rcs));

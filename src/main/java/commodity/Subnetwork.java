@@ -75,7 +75,7 @@ public class Subnetwork {
 
     public void add_link(common.Link link) throws OTMException {
         if(link==null)
-            throw new OTMException("Attempted to add null link");
+            throw new OTMException(String.format("Attempted to add null link to subnetwork %s", getId()));
         links.add(link);
     }
 

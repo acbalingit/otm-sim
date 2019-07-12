@@ -88,7 +88,7 @@ public abstract class AbstractActuator implements InterfacePokable, InterfaceSce
 
     public void set_event_listener(EventsActuator e) throws OTMException {
         if(event_listener!=null)
-            throw new OTMException("multiple listeners for commodity");
+            throw new OTMException(String.format("Multiple listeners assigned to actuator %d", getId()));
         event_listener = e;
     }
 

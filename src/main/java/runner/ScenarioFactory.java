@@ -7,7 +7,8 @@
 package runner;
 
 import actuator.*;
-import actuator.sigint.ActuatorSignal;
+// import actuator.sigint.ActuatorSignal;
+import actuator.sigint.ActuatorSignalManual;
 import commodity.*;
 import commodity.Commodity;
 import commodity.Subnetwork;
@@ -199,7 +200,7 @@ public class ScenarioFactory {
             AbstractActuator actuator;
             switch(jaxb_actuator.getType()){
                 case "signal":
-                    actuator = new ActuatorSignal(scenario,jaxb_actuator);
+                    actuator = new ActuatorSignalManual(scenario,jaxb_actuator);
                     break;
                 case "capacity":
                     actuator = new ActuatorCapacity(scenario,jaxb_actuator);

@@ -7,6 +7,7 @@
 package plugin;
 
 import control.AbstractController;
+import actuator.AbstractActuator;
 import error.OTMException;
 import runner.Scenario;
 
@@ -69,14 +70,33 @@ public class PluginLoader {
             e.printStackTrace();
             return null;
         }
+    }
 
-//            return (AbstractController) loaded_plugins.get(plugin_name).newInstance(scenario,jaxb_controller);
-//        } catch(InstantiationException e) {
-//            throw new OTMException(e);
-//        } catch(IllegalAccessException e) {
-//            throw new OTMException(e);
-//        }
-//    }
+
+        public static AbstractActuator get_actuator_instance(String plugin_name, Scenario scenario, jaxb.Actuator jaxb_actuator) throws OTMException {
+
+            try {
+                Class[] cArg = new Class[2];
+                cArg[0] = Scenario.class; //First argument is of *object* type Long
+                cArg[1] = jaxb.Actuator.class; //Second argument is of *object* type String
+    
+                Class<?> clazz = loaded_plugins.get(plugin_name);
+                Constructor<?> cnstr = clazz.getDeclaredConstructor(cArg);
+                AbstractActuator controller = (AbstractActuator) cnstr.newInstance(scenario, jaxb_actuator);
+                return controller;
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                return null;
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+                return null;
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                return null;
+            }
     }
 
 }

@@ -34,7 +34,7 @@ public class SignalPhaseManual {
     public void validate(OTMErrorLog errorLog) {}
     public void initialize(float time) throws OTMException {}
 
-    private void set_rc_maxflow(float time, float rate) {
+    private void set_rc_maxflow(float time, float rate) {        
         road_connections.forEach(rc -> rc.set_external_max_flow_vps(time, rate));
     }
 

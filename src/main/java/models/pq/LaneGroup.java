@@ -143,6 +143,7 @@ public class LaneGroup extends AbstractLaneGroupVehicles {
                 current_max_flow_rate_vps;
 
         // TODO: REMOVE FUTURE RELEASES?
+        link.network.scenario.dispatcher.remove_events_for_recipient(EventReleaseVehicleFromLaneGroup.class, this);
 
         // schedule a release for now+ half wait time
         schedule_release_vehicle(timestamp,current_max_flow_rate_vps*2);

@@ -60,6 +60,11 @@ public class ActuatorSignalManual extends AbstractActuator {
             p.initialize(now);
     }
 
+    @Override
+    public void poke(Dispatcher dispatcher, float timestamp) throws OTMException {
+        super.poke(dispatcher, timestamp);
+    }
+
     public void turn_off(float now) throws OTMException {
         for(SignalPhaseManual p : signal_phases.values() )
             p.turn_off(now);
@@ -87,6 +92,7 @@ public class ActuatorSignalManual extends AbstractActuator {
     public void process_controller_command(Object command, Dispatcher dispatcher, float timestamp) throws OTMException {
 
         if (command != null){
+            enable_phase((long) command, timestamp);
         } else {
             // null command triggers turning off the signal,
             // i.e. allow traffic to pass for all phases.

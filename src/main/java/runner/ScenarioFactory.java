@@ -7,6 +7,7 @@
 package runner;
 
 import actuator.*;
+import actuator.sigint.ActuatorSignal;
 // import actuator.sigint.ActuatorSignal;
 import actuator.sigint.ActuatorSignalManual;
 import commodity.*;
@@ -200,6 +201,9 @@ public class ScenarioFactory {
             AbstractActuator actuator;
             switch(jaxb_actuator.getType()){
                 case "signal":
+                    actuator = new ActuatorSignal(scenario,jaxb_actuator);
+                    break;
+                case "signal_simple":
                     actuator = new ActuatorSignalManual(scenario,jaxb_actuator);
                     break;
                 case "capacity":
@@ -215,7 +219,7 @@ public class ScenarioFactory {
                     actuator = new ActuatorFD(scenario,jaxb_actuator);
                     break;
                 default:
-                    actuator = null;
+                    actuator = PluginLoader.get_actuator_instance(jaxb_actuator.getType(), scenario, jaxb_actuator);
                     break;
             }
             actuators.put(jaxb_actuator.getId(),actuator);

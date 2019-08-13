@@ -25,7 +25,8 @@ public abstract class AbstractActuator implements InterfacePokable, InterfaceSce
         ramp_meter,
         fd,
         plugin,
-        capacity
+        capacity,
+        signal_simple,
     }
 
     public long id;

@@ -22,6 +22,7 @@ public abstract class AbstractVehicle {
     private KeyCommPathOrLink key;
     public AbstractLaneGroup lg;
     public Path path;
+    public Double start_time;
 
     // dispatch listeners
     private Set<InterfaceVehicleListener> event_listeners;
@@ -33,9 +34,11 @@ public abstract class AbstractVehicle {
         this.key = that.key;
         this.comm_id = that.comm_id;
         this.event_listeners = that.event_listeners;
+        this.start_time = that.start_time;
     }
 
-    public AbstractVehicle(Long comm_id,Set<InterfaceVehicleListener> event_listeners){
+    public AbstractVehicle(Double start_time, Long comm_id,Set<InterfaceVehicleListener> event_listeners){
+        this.start_time = start_time;
         this.id = OTMUtils.get_vehicle_id();
         this.comm_id = comm_id;
         this.event_listeners = new HashSet<>();

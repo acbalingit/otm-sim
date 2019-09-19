@@ -51,8 +51,8 @@ public class Model_Micro extends AbstractVehicleModel implements InterfacePokabl
     //////////////////////////////////////////////////
 
     @Override
-    public AbstractVehicle create_vehicle(Long comm_id,Set<InterfaceVehicleListener> event_listeners) {
-        return new models.micro.Vehicle(comm_id,event_listeners);
+    public AbstractVehicle create_vehicle(Double start_time, Long comm_id,Set<InterfaceVehicleListener> event_listeners) {
+        return new models.micro.Vehicle(start_time, comm_id,event_listeners);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class StateContainer {
                 for(int i=0;i<num_veh;i++) {
                     Scenario scenario = lg.link.network.scenario;
                     Commodity commodity = scenario.commodities.get(key.commodity_id);
-                    AbstractVehicle vehicle = model.create_vehicle(key.commodity_id, commodity.vehicle_event_listeners);
+                    AbstractVehicle vehicle = model.create_vehicle((double) scenario.get_current_time(), key.commodity_id, commodity.vehicle_event_listeners);
                     vehicle.set_key(key);
                     if(key.isPath)
                         vehicle.path = (Path) scenario.subnetworks.get(key.pathOrlink_id);

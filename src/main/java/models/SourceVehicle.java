@@ -53,7 +53,7 @@ public class SourceVehicle extends common.AbstractSource {
         AbstractVehicleModel model = (AbstractVehicleModel) link.model;
 
         // create a vehicle
-        AbstractVehicle vehicle = model.create_vehicle(commodity.getId(),commodity.vehicle_event_listeners);
+        AbstractVehicle vehicle = model.create_vehicle((double) timestamp, commodity.getId(),commodity.vehicle_event_listeners);
 
         // sample key
         KeyCommPathOrLink key = sample_key();

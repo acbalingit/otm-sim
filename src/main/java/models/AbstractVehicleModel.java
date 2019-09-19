@@ -22,7 +22,7 @@ public abstract class AbstractVehicleModel extends AbstractModel {
     //////////////////////////////////////////////////
 
     abstract public AbstractVehicle translate_vehicle(AbstractVehicle that);
-    abstract public AbstractVehicle create_vehicle(Long comm_id,Set<InterfaceVehicleListener> event_listeners);
+    abstract public AbstractVehicle create_vehicle(Double start_time, Long comm_id,Set<InterfaceVehicleListener> event_listeners);
 
     @Override
     public AbstractSource create_source(Link origin, DemandProfile demand_profile, Commodity commodity, Path path) {

@@ -26,8 +26,8 @@ public class Vehicle extends AbstractVehicle {
         this.waiting_for_lane_change = false;
     }
 
-    public Vehicle(Long comm_id, Set<InterfaceVehicleListener> event_listeners){
-        super(comm_id,event_listeners);
+    public Vehicle(Double start_time, Long comm_id, Set<InterfaceVehicleListener> event_listeners){
+        super(start_time, comm_id,event_listeners);
         this.waiting_for_lane_change = false;
     }
 

@@ -7,18 +7,25 @@
 package output;
 
 import commodity.Path;
+import common.Link;
 import error.OTMException;
 import profiles.Profile1D;
 import runner.Scenario;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 
 public class PathTravelTimeWriter extends AbstractOutputTimedSubnetwork {
 
     public boolean instantaneous = true;
     public Path path;
     public Profile1D travel_times;
+    public Map<Long, Profile1D> per_link_tt;
+    public Map<Long, Double> exited_travel_time;
 
     public PathTravelTimeWriter(Scenario scenario, String prefix, String output_folder, Long subnetwork_id, Float outDt) throws OTMException {
         super(scenario, prefix, output_folder, null, subnetwork_id, outDt);
@@ -38,6 +45,12 @@ public class PathTravelTimeWriter extends AbstractOutputTimedSubnetwork {
         super.initialize(scenario);
         if(!write_to_file)
             travel_times = new Profile1D(0f,outDt);
+            per_link_tt = new HashMap<Long, Profile1D>();
+            for (Link link: path.links) {
+                per_link_tt.put(link.getId(), new Profile1D(0f,outDt));
+            }
+
+            exited_travel_time = new HashMap<Long, Double>();
     }
 
     @Override
@@ -69,6 +82,17 @@ public class PathTravelTimeWriter extends AbstractOutputTimedSubnetwork {
     }
 
     public double compute_instantaneous_travel_time(){
+        exited_travel_time = path.links.stream().filter(l -> l.is_sink)
+                                //  .flatMap(x -> x.link_tt.link_per_veh.keySet().stream())
+                                .flatMap(x -> x.link_tt.link_per_veh.entrySet().stream())
+                                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+
+        for (Link link: path.links) {
+            double itt = link.link_tt.instantaneous_travel_time;
+            per_link_tt.get(link.getId()).add(itt);
+        }
+
         return path.links.stream().
                 mapToDouble(link->link.link_tt.instantaneous_travel_time)
                 .sum();

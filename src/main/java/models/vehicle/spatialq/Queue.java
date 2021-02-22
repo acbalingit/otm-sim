@@ -6,6 +6,7 @@ import error.OTMException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Queue {
 
@@ -44,6 +45,25 @@ public class Queue {
 
     public void initialize() throws OTMException {
         vehicles = new ArrayList<>();
+    }
+
+    /**
+     * Check the queue size
+     * @return Number of vehicles in queue
+     */
+    public long size() {
+        return vehicles.size();
+    }
+
+    /**
+     * Fetch the ids of MesoVehicles present 
+     * within the queue.
+     * @return List of MesoVehicle ids
+     */
+    public List<Long> get_vehicle_ids() {
+        return vehicles.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList());
     }
 
     ///////////////////////////////////////////////////

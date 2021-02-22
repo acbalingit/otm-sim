@@ -78,6 +78,23 @@ public abstract class AbstractActuator implements Pokable, InterfaceScenarioElem
         }
     }
 
+    /**
+     * Constructor for creating actuators that are not defined 
+     * in an XML file, i.e. automatically generated when 
+     * model/controller plugin is initialized.
+     * @param scenario - model scenario
+     * @param id - actuator id
+     * @param dt - assigned actuator time step duration
+     * 
+     * TODO: JAXB-based constructors should use basic JAXB-less
+     * constructors on all Abstract simulator classes to make it
+     * more plugin friendly.
+     */
+    public AbstractActuator(Scenario scenario, Long id, Float dt) {
+        this.id = id;
+        this.dt = dt;
+        this.initialized = false;
+    }
     ///////////////////////////////////////////
     // InterfaceScenarioElement
     ///////////////////////////////////////////

@@ -27,6 +27,11 @@ public abstract class AbstractActuatorLaneGroup extends AbstractActuator {
         lgstr = e.getLanegroups();
     }
 
+    public AbstractActuatorLaneGroup(Scenario scenario, Set<AbstractLaneGroup> laneGroups, Long id, Float dt) throws OTMException {
+        super(scenario, id, dt);
+        this.lanegroups = laneGroups;
+    }
+
     @Override
     protected ScenarioElementType get_target_class() {
         return ScenarioElementType.lanegroups;

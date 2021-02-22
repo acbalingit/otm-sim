@@ -32,6 +32,10 @@ public class ActuatorLaneGroupCapacity extends AbstractActuatorLaneGroup  {
         jmin_rate = jact.getMinValue()==null ? jmin_rate=Float.NEGATIVE_INFINITY : jact.getMinValue();
     }
 
+    public ActuatorLaneGroupCapacity(Scenario scenario, Set<AbstractLaneGroup> laneGroups, Long id, Float dt) throws OTMException {
+        super(scenario, laneGroups, id, dt);
+    }
+
     @Override
     public Type getType() {
         return Type.lg_capacity;
